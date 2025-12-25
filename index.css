@@ -78,31 +78,59 @@ main
 }
 
 #interieur-ruche {
-    position:absolute; /* Recouvre tout l'écran, même si on scroll */
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    position: absolute;
+    /* Centrage parfait au milieu du main */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.9); /* Un peu plus petit au départ pour l'effet d'animation */
+    
+    /* Taille réduite (ajuste selon tes envies) */
+    width: 85%; 
+    height: 80%;
+    max-width: 1100px; /* Largeur max pour les grands écrans */
+    max-height: 700px;
+    
+    /* Look & Feel */
+    background: url("assets/nidabeille.png") repeat;
+    background-color: rgba(254, 171, 0, 0.75); /* Transparent pour voir le flou */
+    border-radius: 50px; /* Bords arrondis */
+    border: 8px solid var(--orange-color); /* Une bordure pour bien séparer du fond */
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4); /* Ombre pour donner du relief */
 
-    
-    /* Le fond alvéole */
-    background: url("assets/nidabeille.png") repeat; /* Ou no-repeat cover selon ton image */
-    background-color: #FEAB00;
-    
-    z-index: 200; /* Doit être plus grand que le paysage */
-    
-    /* LA MAGIE POUR CACHER/MONTRER */
-    opacity: 0;            /* Invisible */
-    visibility: hidden;    /* Non cliquable */
-    transition: opacity 0.5s ease; /* Transition douce (fondu) */
+    z-index: 200;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Effet rebond */
 }
 
-
-/* Quand on ajoute cette classe via JS, l'élément apparait */
+/* Quand la ruche est ouverte */
 #interieur-ruche.active {
     opacity: 1;
     visibility: visible;
+    transform: translate(-50%, -50%) scale(1); /* Reprend sa taille normale */
 }
+
+
+#btn-retour {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: var(--orange-color);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-family: tropiland;
+    cursor: pointer;
+    font-size: 1.2em;
+    transition: 0.3s;
+}
+
+#btn-retour:hover {
+    background-color: #d66a00;
+    transform: rotate(5deg) scale(1.1);
+}
+
 
 /* Style rapide pour l'abeille */
 .container-abeille {
@@ -351,4 +379,17 @@ main
     width: 80px;
     height: auto;  /* conserve les proportions */
 }
+}
+
+/* Effet de transition pour un passage au flou en douceur */
+.background-image, .welcome, .ruche-image {
+    transition: filter 0.4s ease;
+}
+
+/* La classe déclenchée par le clic */
+main.ruche-ouverte .background-image,
+main.ruche-ouverte .welcome,
+main.ruche-ouverte .ruche-image {
+    filter: blur(10px); /* Ajuste l'intensité ici */
+    pointer-events: none; /* Empêche de cliquer sur la ruche du fond pendant qu'on est dedans */
 }
