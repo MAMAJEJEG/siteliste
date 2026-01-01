@@ -1,8 +1,12 @@
 body{
 
     grid-template-rows: 1fr 8fr 1fr;
+<<<<<<< HEAD
     
    
+=======
+    margin: 0; /*Pour ne pas avoir de dépassement*/
+>>>>>>> anim
 }
 
 footer{
@@ -24,15 +28,172 @@ footer{
 
 main
 {
+    height:100%;
+    width: 100%;
+    overflow: hidden; 
+    background-color: var(--yellow-color);
+    
+    /* display: grid;
+    align-items: center;
+    text-align: center;
+    grid-template-rows: 1fr 1fr;
+     */
+    /*background: url("assets/fondAnime.gif") repeat-x top ;*/
 
-    display: grid;
+    background: no-repeat center url("assets/fondAvecL\'ecole.png"); 
+    /* background-size: cover;
+    background-attachment: fixed;
+    */ 
+    position: relative;
+    background-color: var(--yellow-color);
+    background-size: cover;
     
 }
 
-.welcome{
+#interieur-ruche {
+    position: absolute;
+    /* Centrage parfait au milieu du main */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.9); /* Un peu plus petit au départ pour l'effet d'animation */
+    
+    /* Taille réduite (ajuste selon tes envies) */
+    width: 85%; 
+    height: 80%;
+    max-width: 1100px; /* Largeur max pour les grands écrans */
+    max-height: 700px;
+    
+    /* Look & Feel */
+    background: url("assets/nidabeille.png") repeat;
+    background-color: rgba(254, 171, 0, 0.75); /* Transparent pour voir le flou */
+    border-radius: 50px; /* Bords arrondis */
+    border: 8px solid var(--orange-color); /* Une bordure pour bien séparer du fond */
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4); /* Ombre pour donner du relief */
+
+    z-index: 200;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Effet rebond */
+}
+
+/* Quand la ruche est ouverte */
+#interieur-ruche.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translate(-50%, -50%) scale(1); /* Reprend sa taille normale */
+}
+
+
+#btn-retour {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: var(--orange-color);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-family: tropiland;
+    cursor: pointer;
+    font-size: 1.2em;
+    transition: 0.3s;
+}
+
+#btn-retour:hover {
+    background-color: #d66a00;
+    transform: rotate(5deg) scale(1.1);
+}
+
+
+/* Style rapide pour l'abeille */
+.container-abeille {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+}
+.bulle-dialogue {
+    background: white;
+    padding: 20px;
+    border-radius: 20px;
+    margin-bottom: 20px;
+    border: 2px solid black;
+    font-family: sans-serif;
+}
+
+
+.background-image {
+    position: absolute; /* Elle flotte */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1; /* On la met tout au fond, derrière le contenu */
+    
+    /* C'est ici que vous choisissez votre "poison" (la méthode d'adaptation) */
+    /* Choisissez UNE seule ligne ci-dessous : */
+    
+    /* OPTION A : Ça remplit tout mais ça déforme (étire/écrase) */
+    /*object-fit: fill;*/ 
+    
+    /* OPTION B : Ça coupe les bords pour garder les proportions (comme background-size: cover) */
+    object-fit: cover; 
+    
+    /* OPTION C : On voit tout sans déformer, mais il y a des vides (comme background-size: contain) */
+    /*object-fit: contain;*/ 
+}
+
+.welcome
+{
+  position: absolute;
+  top: 5%;    /* On le place un peu vers le haut pour laisser de la place au sol */
+  left: 50%;
+  transform: translate(-50%, -50%); /* Centrage parfait */
+  width: 90%;  /* Évite que le texte ne touche les bords sur mobile */
+  text-align: center;
+  z-index: 10; /* Toujours au-dessus du décor */
+  color: var(--orange-color);
+  font-size: clamp(1rem, 15vw, 5rem);
+  pointer-events: none; /* <--- AJOUTE CECI : le clic passera à travers  temporairej'ai*/ 
+}
+
+.tree-image
+{
+  z-index: 2;
+}
+
+.ruche-image
+{
+  position: absolute;
+  z-index: 2;
+  width: 400px;
+  height: auto;
+}
+
+.ruche-image:hover
+{
+  cursor: pointer;
+  transform: scale(1.05);
+  transition: 0.3s;
+}
+
+
+
+
+/*
+.honey-frame {
+    background: url("assets/imgbg.png") no-repeat center top;
+    background-size: cover;
+    padding: 50px;
+    min-height: 100vh;
+}
+*/
+
+/* .welcome{
     font-size: 9em;
     color: var(--orange-color);
-}
+} */
 
 
 
@@ -51,3 +212,155 @@ main
 }
 
 
+<<<<<<< HEAD
+=======
+.nav-link {
+  text-decoration: none;
+  background-color: var(--yellow-color);
+  color: var(--orange-color);
+  padding: 10px 18px;
+  border-radius: 8px;
+  transition: background-color 0.3s, transform 0.2s;
+  width: 50%;
+}
+
+.nav-link:hover {
+  background-color: var(--yellow-hover-color);
+  transform: scale(1.05);
+}
+
+/*Menu Burger */
+
+.menu-icon
+{   
+    display: none;
+    
+}
+
+.menu-icon:hover
+{
+    cursor: pointer;
+}
+
+.fleur1
+{
+  position: absolute;
+}
+
+.fleur2
+{
+  position: absolute;
+  right: 100px;
+}
+
+.fleur3
+{
+  position: absolute;
+
+}
+
+
+.fleur
+{
+  width: 120px;
+  height: auto;
+}
+
+
+@media  (max-width: 1249px){
+  main{
+    background-size: 100%;
+  }
+  
+}
+
+
+@media (max-width: 700px) {
+  body {
+    background-color: lightblue;
+  }
+  .menu-icon
+  {
+    display: block;
+    z-index: 1;
+    justify-self: center; /*Permet de centrer le burger */
+    margin: 0;
+    width: 80px;
+    height: auto;
+  }
+  .menu-icon:hover
+  {
+    transform: scale(1.10);
+    transition: all 0.5s ease;
+  }
+
+  header{
+    grid-template-columns: 1fr 1fr;
+    text-align: center;
+    align-items: center;
+    position: relative;
+  }
+  .nav {
+    display: grid;
+    position: absolute;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    gap: 20px;
+    width: 100vw;
+    top: 100%; /* parent : header car postion relative top100% deplace le nav à 100% de la hauteur de son conteneur parent*/
+    height: calc(100vh - 100%);
+    backdrop-filter: blur(7px);
+    transition: all 0.5s ease;
+    margin-left: -100%;
+   }
+  .mobile-menu
+  {
+    margin-left: 0;
+  }
+  
+  /* .welcome
+  {
+    font-size: 4em;
+  } */
+
+  .nav-link
+   {
+    display: block;
+   }
+   h2 
+   {
+    grid-row: 1;
+   }
+}
+
+/* @media (max-width: 600px)
+{
+   .welcome
+  {
+    font-size: 2em;
+  } 
+
+}*/
+
+@media (max-width: 500px)
+{
+  .logo {
+    width: 80px;
+    height: auto;  /* conserve les proportions */
+}
+}
+
+/* Effet de transition pour un passage au flou en douceur */
+.background-image, .welcome, .ruche-image {
+    transition: filter 0.4s ease;
+}
+
+/* La classe déclenchée par le clic */
+main.ruche-ouverte .background-image,
+main.ruche-ouverte .welcome,
+main.ruche-ouverte .ruche-image {
+    filter: blur(10px); /* Ajuste l'intensité ici */
+    pointer-events: none; /* Empêche de cliquer sur la ruche du fond pendant qu'on est dedans */
+}
+
+>>>>>>> anim

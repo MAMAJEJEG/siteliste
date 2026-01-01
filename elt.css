@@ -1,0 +1,235 @@
+.grass-field {
+  position: absolute;
+  bottom: 0;       /* Collé au bas du main */
+  left: 0;
+  width: 100%;      /* Toute la largeur */
+  height: 80px;     /* Espace réservé pour l'herbe */
+  z-index: 15;
+  pointer-events: none; /* Ne bloque pas le clic sur la ruche */
+}
+
+.grass {
+  position: absolute;
+  bottom: 0;        /* Toutes partent du sol */
+  width: 5px;
+  background: #183a04;
+  border-radius: 50% 50% 0 0;
+  transform-origin: bottom center;
+  animation: grassSway 3s ease-in-out infinite alternate;
+}
+
+@keyframes grassSway {
+  0% { transform: rotate(-8deg) skewX(-5deg); }
+  100% { transform: rotate(8deg) skewX(5deg); }
+}
+
+
+@keyframes treeSway {
+  0% { transform: rotate(-2deg) translateX(-2px); }
+  100% { transform: rotate(2deg) translateX(2px); }
+}
+
+/* --- Styles Communs aux Arbres --- */
+.tree {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transform-origin: bottom center;
+    animation: swayTree 4s ease-in-out infinite alternate;
+    z-index: 5;
+}
+
+.tree .foliage::after {
+    content: '';
+    position: absolute;
+    top: 10%;
+    left: 15%;
+    width: 20%;
+    height: 10%;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    filter: blur(5px); /* Adoucit énormément le reflet */
+}
+
+.trunk {
+    width: 14px;
+    height: 35px;
+    background: #5D4037; /* Marron tronc */
+    border-radius: 2px;
+    margin-top: -5px; /* Pour masquer la jonction */
+}
+
+/* --- Style 1 : Arbre Goutte --- */
+#a1
+{
+    left: 15%;
+    top: 30%;
+}
+
+#a2
+{
+    right:10%;
+    top: 30%;
+}
+
+.teardrop .foliage {
+    width: 70px;
+    height: 180px;
+    /* Effet bicolore net : clair à gauche, sombre à droite */
+    background: linear-gradient(110deg, #91bd5e 20%, #76a347 60%);
+    /* Forme de goutte : très pointu en haut, arrondi en bas */
+    border-radius: 50% 50% 50% 50% / 100% 100% 30% 30%;
+}
+
+/* --- Style 2 : Arbre Nuage --- */
+/* --- Configuration de l'arbre "Nuage" --- */
+.tree.cloud {
+    position: absolute; /* Positionnement sur la scène */
+    bottom: 10%;        /* Un peu plus haut pour l'exemple */
+    right: 15%;         /* Position à droite */
+    width: 180px;       /* Largeur totale augmentée pour plus de volume */
+    height: 220px;      /* Hauteur totale augmentée */
+    display: block;     /* On s'assure que ce n'est pas un flex */
+    z-index: 5;
+}
+
+/* Le Tronc : Centré et en bas */
+.tree.cloud .trunk {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%); /* Centrage horizontal parfait */
+    width: 20px;        /* Un peu plus large */
+    height: 70px;       /* Plus haut pour soutenir le gros feuillage */
+    background: #5D4037; /* Couleur marron unie */
+    border-radius: 3px;
+    z-index: 1;         /* Derrière le feuillage */
+}
+
+/* Le Feuillage Principal (Conteneur) */
+.tree.cloud .foliage {
+    position: absolute;
+    bottom: 55px;       /* Posé sur le haut du tronc */
+    left: 50%;
+    transform: translateX(-50%); /* Centré horizontalement */
+    width: 140px;       /* Corps principal plus large */
+    height: 120px;      /* Corps principal plus haut */
+    /* Dégradé subtil pour le volume, style "plat" */
+    background: linear-gradient(135deg, #8bc34a 0%, #689f38 100%);
+    /* Forme de base irrégulière */
+    border-radius: 60% 70% 50% 60% / 60% 60% 50% 50%;
+    z-index: 3;         /* Devant le tronc */
+    /* Animation de balancement doux */
+    animation: swayTree 4s ease-in-out infinite alternate;
+}
+
+/* --- Les "Boursouflures" (Pseudo-éléments) --- */
+/* Styles communs pour les boursouflures */
+.tree.cloud .foliage::before,
+.tree.cloud .foliage::after {
+    content: '';
+    position: absolute;
+    background: inherit; /* Hérite du dégradé du parent */
+    border-radius: 50%;  /* Formes rondes */
+}
+
+/* Grosse boursouflure en haut à gauche */
+.tree.cloud .foliage::before {
+    width: 100px;
+    height: 100px;
+    top: -40px; /* Plus haut */
+    left: -30px; /* Plus à gauche */
+}
+
+/* Grosse boursouflure en haut à droite */
+.tree.cloud .foliage::after {
+    width: 90px;
+    height: 90px;
+    top: -25px; /* Plus haut */
+    right: -35px; /* Plus à droite */
+}
+
+
+
+/* --- Pour ajouter encore PLUS de boursouflures (Optionnel) --- */
+/* On peut utiliser un élément enfant supplémentaire pour une 3ème boursouflure */
+
+.tree.cloud .foliage .extra-puff {
+    position: absolute;
+    background: inherit;
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    bottom: -15px;
+    left: 0px;
+    z-index: -1; 
+}
+
+.tree.cloud .foliage .extra-puff2 {
+    position: absolute;
+    background: inherit;
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    top: 10px;
+    left: 80px;
+    z-index: -1; 
+}
+
+
+/* --- Les Branches Internes (Le "V") --- */
+.tree.cloud .inner-branch {
+    position: absolute;
+    bottom: 0px;
+    left: 50%;
+    width: 7px;
+    height: 50px;
+    background-color: #5D4037;
+    transform-origin: bottom center;
+    transform: translateX(-50%) rotate(-18deg); /* Branche gauche */
+    border-radius: 3px;
+    /* opacity: 0.8; */
+    z-index: 4; /* Devant le feuillage de base */
+}
+
+/* Deuxième branche du V */
+.tree.cloud .inner-branch::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 7px;
+    height: 45px;
+    background-color: inherit;
+    transform-origin: bottom center;
+    transform: rotate(36deg); /* Branche droite */
+    border-radius: 3px;
+}
+
+/* --- Animation du balancement (à mettre dans ton CSS principal si pas déjà fait) --- */
+@keyframes swayTree {
+    0% { transform: translateX(-50%) rotate(-2deg); }
+    100% { transform: translateX(-50%) rotate(2deg); }
+}
+
+
+.flying-bee {
+    position: absolute;
+    width: 50px; /* Taille de l'abeille */
+    height: auto;
+    z-index: 100; /* Toujours au premier plan */
+    pointer-events: none; /* L'utilisateur peut cliquer "à travers" l'abeille */
+    will-change: transform;
+}
+
+/* Animation des ailes */
+.bee-wing {
+    transform-origin: bottom center;
+    animation: flapWings 0.1s infinite alternate;
+}
+
+@keyframes flapWings {
+    from { transform: scaleY(0.2); }
+    to { transform: scaleY(1.2); }
+}
