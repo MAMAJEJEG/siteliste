@@ -1,3 +1,24 @@
+:root {
+    --honey-light: #fffbeb;
+    --honey-gold: #fbbf24;
+    --honey-dark: #b45309;
+    --glass-bg: rgba(255, 255, 255, 0.4);
+    --glass-border: rgba(255, 255, 255, 0.6);
+}
+
+.imgtable[src=""], 
+.imgtable:not([src]) {
+    display: none !important;
+}
+
+
+/* Appliquer une police plus sympa (ex: Quicksand ou Montserrat si tu les importes) */
+body {
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    background-color: #f59e0b; /* Fallback couleur miel */
+    color: var(--honey-dark);
+}
+
 body{
   
     grid-template-rows: 1fr 9fr;
@@ -20,16 +41,37 @@ main
   height: 100%;
 }
 
-.dateContainer
-{
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+.dateContainer {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    align-items: center; /* Aligne les 3 blocs sur la même ligne imaginaire */
+    height: 60px; /* Optionnel : fixe une hauteur pour la barre de contrôle */
 }
 
-.dateSelect
+.dateSelect {
+    display: grid;
+    /* On fixe les colonnes des bords (50px) et on laisse le milieu flexible */
+    grid-template-columns: 1fr 5fr 1fr; 
+    align-items: center;
+    justify-content: center; /* Centre le bloc entier dans le container */
+    gap: 10px;
+}
+
+.date {
+    margin: 0;
+    font-weight: bold;
+    text-align: center;
+    /* On s'assure que le texte ne fait pas bouger la grille */
+    white-space: nowrap; 
+    overflow: hidden;
+    text-overflow: ellipsis; /* Ajoute "..." si la date est vraiment trop longue */
+}
+
+
+.dateSelectFormat, .todayButtonContainer
 {
   display: flex;
-  justify-content:center;
+  justify-content: center;
   align-items: center;
 }
 
@@ -63,9 +105,6 @@ main
   flex-grow: 1;        /* Divise l'espace en 3 parts égales (Matin/Midi/Soir) */
   
 }
-.tableJour table, th, td {
-  border: 1px solid;
-}
 
 .tableJour th
 {
@@ -74,38 +113,107 @@ main
   align-items: center;
 }
 
-.tablesSemaine
+/* .tablesSemaine
 {
-  display: flex;       /* Change le comportement par défaut de la table */
+  display: flex;       
   flex-direction: column;
   width: 99%;
   height: 98%; 
-}
+} */
 
-/* Configuration spécifique pour le tableau Semaine */
-.tablesSemaine tr {
+
+/* .tablesSemaine tr {
     display: grid;
-    /* 1 colonne pour le label, puis 7 colonnes pour les jours */
     grid-template-columns: repeat(8, 1fr); 
     flex-grow: 1; 
     width: 100%;
+} */
+/* --- TABLE SEMAINE UNIFIÉE --- */
+.tablesSemaine {
+    display: grid !important; /* Le tableau devient la grille principale */
+    grid-template-columns: 80px repeat(7, 1fr); /* 1 col étiquette + 7 cols jours */
+    grid-template-rows: auto repeat(3, 1fr); /* 1 ligne header + 3 lignes (Matin/Midi/Soir) */
+    width: 100%;
+    height: 100%;
+    gap: 10px; /* Gère l'espace entre toutes les cartes d'un coup */
+    border: none !important;
 }
 
-.tablesSemaine th, .tablesSemaine td {
+/* On "efface" les structures intermédiaires pour que TH et TD s'alignent sur la même grille */
+.tablesSemaine thead, 
+.tablesSemaine tbody, 
+.tablesSemaine tr {
+    display: contents; 
+}
+
+/* Style des cellules (Cartes) */
+.tablesSemaine th, 
+.tablesSemaine td {
+    margin: 0; /* On utilise gap à la place */
+    padding: 10px 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80px;
+    border: 1px solid var(--glass-border) !important;
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+/* Couleur spécifique pour les étiquettes fixes (Matin/Midi/Soir et Jours) */
+.tablesSemaine thead th,
+.tablesSemaine tbody th {
+    background: rgba(251, 191, 36, 0.8);
+    color: white;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+/* Ajustement pour l'image */
+.imgtable {
+    max-width: 90%;
+    max-height: 80px;
+    object-fit: contain;
+}
+
+
+/* .tablesSemaine th, .tablesSemaine td {
     border: 1px solid;
     padding: 15px 5px;
     text-align: center;
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 80px; /* Donne de la hauteur aux cases */
+    min-height: 80px; 
+} */
+
+/* .tablesSemaine tbody{
+  
+
+
+  display: grid;
+  grid-template-columns: repeat(8,1fr);
+  grid-template-rows: repeat(3,1fr);
+  
+ 
+  height: 100%;
+} */
+
+.l1
+{
+  grid-row: 1;
 }
 
-.tablesSemaine tbody{
-  display: flex;       /* Change le comportement par défaut de la table */
-  flex-direction: column;
-  flex-grow: 1;        /* Force le corps du tableau à grossir */
-  height: 100%;
+.l2
+{
+  grid-row: 2;
+}
+
+.l3
+{
+  grid-row:3;
 }
 
 /* Style pour l'en-tête (Lun, Mar...) */
@@ -120,19 +228,157 @@ main
     font-weight: bold;
 }
 
-.imgtable
-{
-  width: 100px;
-  height: auto;
-}
-
 .tablesHide
 {
-  display: none;
+  display: none !important;
 }
 
-/* #imgLogoListe
-{
-  width: 400px;
-  height: auto;
-} */
+/* Style des cartes du planning */
+.tableJour, .tablesSemaine {
+    border-collapse: separate;
+    border-spacing: 10px; /* Espace entre les cases */
+    border: none !important;
+}
+
+.tableJour th, .tableJour td, 
+.tablesSemaine th, .tablesSemaine td {
+    border: 1px solid var(--glass-border) !important;
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px); /* L'effet de flou magique */
+    -webkit-backdrop-filter: blur(12px);
+    border-radius: 15px; /* Bords arrondis pour le côté "miel" */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease;
+}
+
+/* Mise en valeur des étiquettes (Matin, Midi, Soir) */
+.tableJour th:first-child, 
+.tablesSemaine th {
+    background: rgba(251, 191, 36, 0.8); /* Jaune miel plus opaque */
+    color: white;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.tableJour tr:hover td, 
+.tablesSemaine td:hover {
+    transform: scale(1.02); /* Petit zoom */
+    background: rgba(255, 255, 255, 0.6);
+    cursor: pointer;
+}
+
+.imgtable {
+    width: 80px; /* Un peu plus petit pour laisser respirer */
+    height: 80px;
+    object-fit: contain;
+    filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));
+    border-radius: 50%; /* Si tes logos sont ronds, sinon enlève */
+}
+
+.dateContainer {
+    background: var(--glass-bg);
+    margin: 10px 20px;
+    border-radius: 50px; /* Forme pilule */
+    padding: 10px;
+    backdrop-filter: blur(5px);
+}
+
+/* Style commun pour tous les contrôles (fond, bordure, ombre) */
+.todayButton, .datePrevious, .dateNext, #FormatSelect {
+    background: white;
+    border: none;
+    color: var(--honey-dark);
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    transition: all 0.2s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Style spécifique pour les boutons flèches (Ronds) */
+.datePrevious, .dateNext {
+    width: 40px;  /* Largeur fixe */
+    height: 40px; /* Hauteur identique */
+    border-radius: 50% !important; /* Cercle parfait */
+    padding: 0;   /* On enlève le padding qui déforme */
+    font-size: 1.2rem;
+}
+
+.datePrevious { justify-self: end; }
+.dateNext { justify-self: start; }
+
+/* Style spécifique pour Aujourd'hui et le Select (Pilules) */
+.todayButton, #FormatSelect {
+    padding: 8px 20px;
+    border-radius: 20px;
+}
+.todayButton:hover, .dateNext:hover, .datePrevious:hover {
+    background: var(--honey-gold);
+    color: white;
+}
+
+
+/* Responsive */
+
+@media (max-width: 600px) {
+    .dateContainer {
+        grid-template-columns: 1fr; /* On empile tout */
+        grid-template-rows: auto auto auto;
+        gap: 10px;
+        height: auto;
+        padding: 15px;
+        border-radius: 20px;
+    }
+
+    .dateSelect {
+        grid-template-columns: 40px 1fr 40px; /* On garde les boutons alignés */
+        width: 100%;
+    }
+
+    .date {
+        font-size: 0.9rem; /* Texte un peu plus petit */
+    }
+
+    
+}
+
+@media (max-width: 600px) {
+    .tableJour tr {
+        grid-template-columns: 1fr; /* Une seule colonne */
+        grid-template-rows: auto 1fr; /* Titre en haut, logo en bas */
+        margin-bottom: 10px;
+    }
+
+    .tableJour th:first-child {
+        padding: 5px;
+        font-size: 0.8rem;
+        border-radius: 15px 15px 0 0; /* Arrondi seulement en haut */
+    }
+
+    .tableJour td {
+        border-radius: 0 0 15px 15px; /* Arrondi seulement en bas */
+        min-height: 120px;
+    }
+    
+    .imgtable {
+        width: 70px; /* Ajuste la taille pour mobile */
+    }
+}
+
+@media (max-width: 768px) {
+    .tableContainer {
+        display: block; /* On sort du mode flex pour permettre le scroll */
+        overflow-x: auto; /* Scroll horizontal si ça dépasse */
+        -webkit-overflow-scrolling: touch;
+        padding-bottom: 20px;
+    }
+
+    .tablesSemaine {
+        min-width: 600px; /* On force une largeur minimum pour que les colonnes respirent */
+    }
+
+}
+
