@@ -546,32 +546,4 @@
 }
 
 
-@media (max-width: 768px) {
-    .tree {
-        /* On réduit la taille globale des arbres de 40% sur mobile */
-        transform: scale(0.6) !important;
-    }
-    
-    .teardrop .foliage {
-        height: 120px; /* On réduit un peu la hauteur spécifique */
-    }
 
-    .tree.cloud {
-        width: 120px;
-        height: 150px;
-    }
-
-    #a1 { left: 10%; bottom: 25%; top: auto; }
-    #a2 { right: 20%; bottom: 5%; top: auto; }
-    #a3 { left: 25%; bottom: 15%; }
-    #a4 { right: 7%; bottom: 20%;}
-
-    .ruche-image
-    {
-        right: 2%;    /* On augmente le right pour la décaler à gauche de l'arbre */
-        bottom: 20%;
-        width: 150px;  /* Taille ajustée pour l'arbre cloud */
-        height: auto;
-    }
-
-}

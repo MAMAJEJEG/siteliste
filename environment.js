@@ -1,12 +1,28 @@
-// --- Logique de Random déterministe (Seed) ---
-const seed = 7; 
-function seededRandom(s) {
+// // --- Logique de Random déterministe (Seed) ---
+// const seed = 7; 
+// function seededRandom(s) {
+//     return function() {
+//         s = Math.sin(s) * 10000;
+//         return s - Math.floor(s);
+//     };
+// }
+// const myRandom = seededRandom(seed);
+
+
+// --- Logique de Random déterministe (Version robuste) ---
+function createSeededRandom(a) {
     return function() {
-        s = Math.sin(s) * 10000;
-        return s - Math.floor(s);
-    };
+      let t = a += 0x6D2B79F5;
+      t = Math.imul(t ^ t >>> 15, t | 1);
+      t ^= t + Math.imul(t ^ t >>> 7, t | 61);
+      return ((t ^ t >>> 14) >>> 0) / 4294967296;
+    }
 }
-const myRandom = seededRandom(seed);
+
+// On utilise des seeds différentes pour que l'herbe et les fleurs
+// n'aient pas exactement le même motif de placement
+const grassRandom = createSeededRandom(7); 
+const flowerRandom = createSeededRandom(3);
 
 // --- 1. GÉNÉRATION DE L'HERBE ---
 export function initGrass() {
@@ -18,10 +34,10 @@ export function initGrass() {
         const grass = document.createElement('div');
         grass.classList.add('grass');
 
-        const posX = myRandom() * 100;
-        const height = 20 + myRandom() * 30;
-        const delay = myRandom() * -5;
-        const brightness = 80 + myRandom() * 40;
+        const posX = grassRandom() * 100;
+        const height = 20 + grassRandom() * 30;
+        const delay = grassRandom() * -5;
+        const brightness = 80 + grassRandom() * 40;
 
         grass.style.left = `${posX}%`;
         grass.style.height = `${height}px`;
@@ -89,14 +105,14 @@ export function spawnImageFlowers(count) {
 
     for (let i = 0; i < count; i++) {
         const img = document.createElement('img');
-        const randomIndex = Math.floor(myRandom() * flowerImages.length);
+        const randomIndex = Math.floor(flowerRandom() * flowerImages.length);
         img.src = flowerImages[randomIndex];
         img.classList.add('scattered-flower');
 
-        const bottom = 5 + myRandom() * 30; 
-        const left = myRandom() * 95; 
-        const scale = 0.4 + myRandom() * 0.8; 
-        const delay = myRandom() * -5;
+        const bottom = 5 + flowerRandom() * 30; 
+        const left = flowerRandom() * 95; 
+        const scale = 0.4 + flowerRandom() * 0.8; 
+        const delay = flowerRandom() * -5;
 
         img.style.bottom = `${bottom}%`;
         img.style.left = `${left}%`;
