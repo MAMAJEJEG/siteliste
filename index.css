@@ -491,4 +491,54 @@ main.ruche-ouverte .ruche-image {
       width: 25px;
       height: auto;
     }
+
+    .abeille-personnage
+    {
+      width: 100px;
+      height: auto;
+    }
+
+    .container-abeille {
+        display: flex; /* On passe en mode ligne */
+        flex-direction: row; 
+        align-items: center; /* Aligne verticalement la bulle et l'abeille */
+        bottom: 5%; /* On remonte un peu le tout */
+        width: auto;
+        gap: 20px; /* Espace entre la bulle et l'abeille */
+    }
+
+    .bulle-dialogue {
+        margin-bottom: 0; /* On retire la marge du bas */
+        max-width: 220px; /* On réduit un peu la largeur pour gagner de la place */
+        font-size: 0.9rem; /* Texte un peu plus petit */
+        padding: 15px;
+    }
+
+    /* --- On déplace la pointe de la bulle vers la DROITE --- */
+    .bulle-dialogue::after {
+        bottom: 50%; /* Centré verticalement */
+        left: auto;
+        right: -24px; /* Sort de la bulle à droite */
+        transform: translateY(50%);
+        /* On change les bordures pour pointer vers la droite */
+        border-width: 15px 0 15px 25px;
+        border-color: transparent transparent transparent #222;
+    }
+
+    .bulle-dialogue::before {
+        bottom: 50%;
+        left: auto;
+        right: -17px;
+        transform: translateY(50%);
+        /* Pointe blanche pour l'effet bordure */
+        border-width: 12px 0 12px 22px;
+        border-color: transparent transparent transparent white;
+        z-index: 1;
+    }
+
+    /* On s'assure que l'animation part du bon endroit (le côté) */
+    #interieur-ruche.active .bulle-dialogue {
+        transform-origin: center right; 
+    }
+    
 }

@@ -22,7 +22,8 @@ function createSeededRandom(a) {
 // On utilise des seeds différentes pour que l'herbe et les fleurs
 // n'aient pas exactement le même motif de placement
 const grassRandom = createSeededRandom(7); 
-const flowerRandom = createSeededRandom(3);
+const flowerRandom = createSeededRandom(7);
+
 
 // --- 1. GÉNÉRATION DE L'HERBE ---
 export function initGrass() {
