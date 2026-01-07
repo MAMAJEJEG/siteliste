@@ -57,63 +57,68 @@ function printContent() {
     const mode = select.value;
     const slots = ['matin', 'midi', 'soir'];
 
+    // Fonction utilitaire pour générer les images dans une cellule
+    const fillCell = (cellSelector, listesArray) => {
+    const cell = document.querySelector(cellSelector);
+    if (!cell) return;
+    
+    // On cherche le wrapper, ou la cellule elle-même si pas de wrapper
+    const wrapper = cell.querySelector('.img-wrapper') || cell; 
+    wrapper.innerHTML = ""; // On vide la case
+
+    if (listesArray && Array.isArray(listesArray) && listesArray.length > 0) {
+        // --- NOUVEAU : Détection du mode "Feat" ---
+        if (listesArray.length > 1) {
+            // S'il y a plus d'1 logo, on active le mode "pile diagonale"
+            wrapper.classList.add('feat-stack');
+        } else {
+            // Sinon, on s'assure que la classe est retirée pour un centrage normal
+            wrapper.classList.remove('feat-stack');
+        }
+
+        // Création des images
+        listesArray.forEach((nom, index) => {
+            const img = document.createElement('img');
+            img.src = `assets/Logo${nom}.jpg`;
+            // Ajout d'un z-index croissant pour que le dernier du tableau soit au-dessus
+            img.style.zIndex = index + 1; 
+            img.className = "imgtable";
+            wrapper.appendChild(img);
+        });
+    } else {
+        // Si la case est vide, on nettoie la classe
+        wrapper.classList.remove('feat-stack');
+    }
+};
+
     if (mode === "jour") {
         const dateStr = getFormatYYYYMMDD(currentDate);
-        slots.forEach(slotName => {
-            const nomliste = (donneesEvents[dateStr] && donneesEvents[dateStr][slotName]) || "";
-            const LogoListe = nomliste ? `assets/Logo${nomliste}.jpg` : "";
-            const imgLogoListe = tablesJour.querySelector(".img" + slotName + "1");
-            if (imgLogoListe) imgLogoListe.src = LogoListe;
+        slots.forEach(slot => {
+            const listes = (donneesEvents[dateStr] && donneesEvents[dateStr][slot]) || [];
+            fillCell(`.tableJour .${slot}1`, listes);
         });
     } else {
         // --- MODE SEMAINE ---
-        // 1. On trouve le LUNDI de la semaine actuelle
         let tempDate = new Date(currentDate);
         const dayNum = tempDate.getDay(); 
-        const diffToMonday = (dayNum === 0 ? 6 : dayNum - 1);
-        tempDate.setDate(tempDate.getDate() - diffToMonday);
+        tempDate.setDate(tempDate.getDate() - (dayNum === 0 ? 6 : dayNum - 1));
 
-        // 2. On utilise UNE SEULE BOUCLE pour tout remplir (Logos + En-têtes)
         for (let i = 0; i < 7; i++) {
             const dateStr = getFormatYYYYMMDD(tempDate);
-            const columnNum = i + 1;
-
-            // Remplissage des Logos
-            slots.forEach(slotName => {
-                const nomliste = (donneesEvents[dateStr] && donneesEvents[dateStr][slotName]) || "";
-                const LogoListe = nomliste ? `assets/Logo${nomliste}.jpg` : "";
-                const imgLogoListe = tablesSemaine.querySelector(".img" + slotName + columnNum);
-
-                if (imgLogoListe) {
-                    imgLogoListe.src = LogoListe;
-                    imgLogoListe.style.display = nomliste ? "block" : "none";
-                }
+            const col = i + 1;
+            
+            slots.forEach(slot => {
+                const listes = (donneesEvents[dateStr] && donneesEvents[dateStr][slot]) || [];
+                fillCell(`.tablesSemaine .${slot}${col}`, listes);
             });
 
-            // MISE À JOUR DES EN-TÊTES (Lun. 22, etc.)
-            const headCell = tablesSemaine.querySelector(`.head-${columnNum}`);
-
+            // Mise à jour de l'en-tête (Lun. 12, etc.)
+            const headCell = tablesSemaine.querySelector(`.head-${col}`);
             if (headCell) {
-                const d = tempDate.getDate();
-                const m = tempDate.toLocaleDateString('fr-FR', { weekday: 'short' });
-                headCell.innerHTML = `${m} ${d}`;
-
-                // --- CORRECTION DE LA LOGIQUE "TODAY" ---
-                const aujourdhui = new Date();
-                
-                // On compare uniquement le jour, le mois et l'année
-                const estAujourdhui = tempDate.toDateString() === aujourdhui.toDateString();
-
-                if (estAujourdhui) {
-                    headCell.classList.add("today-header");
-                } else {
-                    // Important : on enlève la classe si ce n'est pas aujourd'hui 
-                    // (pour quand on change de semaine)
-                    headCell.classList.remove("today-header");
-                }
+                headCell.innerHTML = `${tempDate.toLocaleDateString('fr-FR', { weekday: 'short' })} ${tempDate.getDate()}`;
+                const isToday = tempDate.toDateString() === new Date().toDateString();
+                headCell.classList.toggle("today-header", isToday);
             }
-
-            // On avance d'un jour pour la colonne suivante
             tempDate.setDate(tempDate.getDate() + 1);
         }
     }

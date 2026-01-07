@@ -1,82 +1,82 @@
 {
   "2025-12-28": {
-    "matin": "Napoliste",
-    "midi": "Williste",
-    "soir": "Braziliste"
+    "matin": ["Napoliste"],
+    "midi": ["Williste"],
+    "soir": ["Braziliste", "Napoliste"]
   },
   "2025-12-29": {
-    "matin": "Thierceliste",
-    "midi": "Braziliste",
-    "soir": "Napoliste"
+    "matin": ["Thierceliste"],
+    "midi": ["Braziliste", "Williste"],
+    "soir": ["Napoliste"]
   },
   "2025-12-30": {
-    "matin": "Williste",
-    "midi": "Thierceliste",
-    "soir": "Braziliste"
+    "matin": ["Williste"],
+    "midi": ["Thierceliste"],
+    "soir": ["Braziliste"]
   },
   "2025-12-31": {
-    "matin": "Napoliste",
-    "midi": "Williste",
-    "soir": "Thierceliste"
+    "matin": ["Napoliste", "Thierceliste"],
+    "midi": ["Williste"],
+    "soir": ["Thierceliste"]
   },
   "2026-01-02": {
-    "matin": "Braziliste",
-    "midi": "Napoliste",
-    "soir": "Williste"
+    "matin": ["Braziliste"],
+    "midi": ["Napoliste"],
+    "soir": ["Williste", "Braziliste"]
   },
   "2026-01-03": {
-    "matin": "Thierceliste",
-    "midi": "Braziliste",
-    "soir": "Napoliste"
+    "matin": ["Thierceliste"],
+    "midi": ["Braziliste"],
+    "soir": ["Napoliste"]
   },
   "2026-01-04": {
-    "matin": "Williste",
-    "midi": "Thierceliste",
-    "soir": "Braziliste"
+    "matin": ["Williste"],
+    "midi": ["Thierceliste", "Napoliste"],
+    "soir": ["Braziliste"]
   },
   "2026-01-05": {
-    "matin": "Napoliste",
-    "midi": "Williste",
-    "soir": "Thierceliste"
+    "matin": ["Napoliste"],
+    "midi": ["Williste"],
+    "soir": ["Thierceliste"]
   },
   "2026-01-06": {
-    "matin": "Braziliste",
-    "midi": "Napoliste",
-    "soir": "Williste"
+    "matin": ["Braziliste", "Williste"],
+    "midi": ["Napoliste"],
+    "soir": ["Williste"]
   },
   "2026-01-07": {
-    "matin": "Thierceliste",
-    "midi": "Braziliste",
-    "soir": "Napoliste"
+    "matin": ["Thierceliste"],
+    "midi": ["Braziliste", "Napoliste"],
+    "soir": ["Napoliste"]
   },
   "2026-01-08": {
-    "matin": "Williste",
-    "midi": "Thierceliste",
-    "soir": "Braziliste"
+    "matin": ["Williste"],
+    "midi": ["Thierceliste"],
+    "soir": ["Braziliste", "Williste"]
   },
   "2026-01-09": {
-    "matin": "Napoliste",
-    "midi": "Williste",
-    "soir": "Thierceliste"
+    "matin": ["Napoliste"],
+    "midi": ["Williste", "Braziliste"],
+    "soir": ["Thierceliste"]
   },
   "2026-01-10": {
-    "matin": "Braziliste",
-    "midi": "Napoliste",
-    "soir": "Williste"
+    "matin": ["Braziliste"],
+    "midi": ["Napoliste"],
+    "soir": ["Williste", "Thierceliste"]
   },
   "2026-01-11": {
-    "matin": "Thierceliste",
-    "midi": "Braziliste",
-    "soir": "Napoliste"
+    "matin": ["Thierceliste"],
+    "midi": ["Braziliste"],
+    "soir": ["Napoliste"]
   },
   "2026-01-12": {
-    "matin": "Williste",
-    "midi": "Thierceliste",
-    "soir": "Braziliste"
+    "matin": ["Williste", "Napoliste"],
+    "midi": ["Thierceliste"],
+    "soir": ["Braziliste"]
   },
   "2026-01-13": {
-    "matin": "Napoliste",
-    "midi": "Williste",
-    "soir": "Thierceliste"
+    "matin": ["Napoliste"],
+    "midi": ["Williste"],
+    "soir": ["Thierceliste", "Braziliste"]
   }
 }

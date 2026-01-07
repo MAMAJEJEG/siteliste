@@ -274,6 +274,89 @@ main
     align-items: center;
 } */
 
+.tablesSemaine .img-wrapper,
+.tableJour .img-wrapper {
+    position: relative; /* Important : devient le repère pour les images absolues */
+    width: 100%;
+    height: 100%;
+    min-height: 80px; /* Assure de la place */
+    
+    /* Par défaut : on utilise Flexbox pour centrer parfaitement UN seul logo */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.img-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px; /* Espace entre les deux logos */
+    width: 100%;
+    height: 100%;
+    padding: 5px;
+}
+
+/* Si un seul logo, il garde sa taille. Si deux, on les réduit un peu */
+.imgtable {
+    flex-shrink: 1; /* Permet aux logos de rétrécir pour tenir à deux */
+    
+}
+
+/* Optionnel : effet de superposition pour un look "feat" plus stylé */
+.img-wrapper img:nth-child(2) {
+    margin-left: -15px; /* Les logos se chevauchent légèrement */
+    z-index: 1;
+}
+
+/* --- ÉTAT "FEAT" : Superposition Diagonale --- */
+/* Quand le JS ajoute la classe .feat-stack */
+.feat-stack {
+    position: relative;
+    display: block; /* On désactive Flexbox */
+    /* On s'assure que le conteneur est assez grand pour contenir la pile */
+    min-width: 100px;
+    min-height: 100px;
+}
+
+/* Quand une image est dans une pile */
+.feat-stack .imgtable {
+    position: absolute; /* On passe en position absolue */
+    width: 60px; /* On réduit un peu la taille des logos en pile */
+    height: 60px;
+    /* Position de départ (le premier logo, celui du dessous) */
+    top: 50%;
+    left: 50%;
+    transform: translate(-70%, -70%); 
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* --- LE DÉCALAGE DIAGONAL --- */
+
+/* Le 2ème logo (au milieu) est décalé vers le bas-droite */
+.feat-stack .imgtable:nth-child(2) {
+    transform: translate(-30%, -30%);
+}
+
+/* Le 3ème logo (au-dessus) est décalé encore plus */
+.feat-stack .imgtable:nth-child(3) {
+    transform: translate(10%, 10%);
+}
+
+/* --- Effet de survol interactif --- */
+/* Au survol de la case, les logos s'écartent du centre pour mieux les voir */
+.feat-stack:hover .imgtable:nth-child(1) {
+    transform: translate(-90%, -90%) rotate(-5deg);
+}
+
+.feat-stack:hover .imgtable:nth-child(2) {
+    transform: translate(-10%, -10%) rotate(5deg) scale(1.1);
+}
+.feat-stack:hover .imgtable:nth-child(3) { transform: translate(5px, 5px); }
+
+
+
 /* Le reflet (caché à gauche par défaut) */
 .img-wrapper::after {
     content: "";
@@ -366,7 +449,7 @@ main
         font-size: 0.9rem; 
     }
     .tablesSemaine {
-        grid-template-columns: 80px repeat(7, minmax(60px, 1fr)); /* 1 col étiquette + 7 cols jours */
+        grid-template-columns: 80px repeat(7, minmax(100x, 1fr)); /* 1 col étiquette + 7 cols jours */
        
     }
     .tablesSemaine .imgtable
@@ -424,7 +507,7 @@ main
     }
 
     .tablesSemaine {
-        grid-template-columns: 80px repeat(7, minmax(60px, 1fr)); /* 1 col étiquette + 7 cols jours */
+        grid-template-columns: 80px repeat(7, minmax(110px, 1fr)); /* 1 col étiquette + 7 cols jours */
         grid-template-rows: auto repeat(3, 110px);
         height: auto !important;
         align-content: start;
@@ -433,8 +516,8 @@ main
 
     .tablesSemaine .imgtable
     {
-        width: 40px;
-        height: 40px;
+        width: 35px;
+        height: 35px;
     }
 
 }
