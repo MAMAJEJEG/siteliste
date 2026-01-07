@@ -1,0 +1,23 @@
+/* @media (max-height: 650px) and (orientation: landscape) {
+    .date {
+        font-size: 0.9rem; 
+    }
+    .tablesSemaine {
+        grid-template-columns: 80px repeat(7, minmax(60px, 1fr)); 
+    
+    }
+
+    .tablesSemaine .imgtable
+    {
+        width: 40px;
+        height: 40px;
+    }
+
+    .tablesSemaine  .img-wrapper {
+        
+        width: 40px;
+        height: 40px;
+        
+    }
+    
+} */

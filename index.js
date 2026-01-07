@@ -1,7 +1,7 @@
 import { initBees, bees } from './beeSystem.js';
 import { startCloudSystem, spawnImageFlowers, initGrass } from './environment.js';
 import { createParticles } from './effects.js';
-
+import {setupButterflies} from './butterfly.js'
 
 // ================= EASTER EGG OURS =================
 
@@ -131,6 +131,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initBees(5);
     initGrass();
     setupEasterEgg();
+    setupButterflies();
 
     const main = document.querySelector('main');
     const vueInterieure = document.getElementById('interieur-ruche');
