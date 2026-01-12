@@ -496,6 +496,54 @@ main
     font-size: 1.8em;
 }
 
+.relative-cell {
+    position: relative !important;
+}
+
+.quest-icon
+{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8em;
+}
+
+/* Modifie ces classes dans ton fichier planning.css */
+
+.egg-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.7); /* Fond un peu moins opaque pour voir le planning */
+    z-index: 3000;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(4px); /* Flou plus léger */
+}
+
+.video-container {
+    position: relative;
+    width: 60%; /* Réduit à 60% de la largeur de l'écran */
+    max-width: 600px; /* Taille maximale fixe pour les grands écrans */
+    background: #000;
+    border-radius: 15px;
+    border: 3px solid #fbbf24; /* Bordure miel pour rappeler le thème */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+}
+
+#egg-video-player {
+    width: 100%;
+    display: block;
+}
+
+
+
 @media (max-width: 768px) {
     .tableContainer {
         display: block; /* On sort du mode flex pour permettre le scroll */

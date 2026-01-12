@@ -244,5 +244,11 @@
       "logos": [],
       "texte": "Reveal + Passa BDE"
     }
+  },
+  "2027-01-05": {
+    "midi": {
+      "logos": [],
+      "isSecret": true
+    }
   }
 }

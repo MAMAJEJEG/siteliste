@@ -66,6 +66,20 @@ function printContent() {
 
         if (!dataObj) return;
 
+        if (dataObj.isSecret) {
+            const secretIcon = document.createElement('span');
+            secretIcon.className = 'quest-icon';
+            secretIcon.textContent = '?';
+            // On lie l'événement directement à la création dynamique
+            secretIcon.onclick = (e) => {
+                console.log("test");
+                e.stopPropagation();
+                openSecretVideo(); // Fonction définie plus bas
+            };
+            
+            wrapper.appendChild(secretIcon);
+        }
+
         // --- 1. GESTION DES LOGOS ---
         const logos = dataObj.logos || [];
         if (logos.length > 0) {
@@ -177,3 +191,31 @@ todayButton.addEventListener('click', function() {
     
     console.log("Retour à aujourd'hui :", currentDate);
 });
+
+window.openSecretVideo = function() {
+    const overlay = document.getElementById('video-egg-overlay');
+    const video = document.getElementById('egg-video-player');
+    
+    if (overlay && video) {
+        overlay.style.display = 'flex';
+        video.play();
+        document.body.style.overflow = 'hidden';
+
+        // --- NOUVEAU : Détecter la fin de la vidéo ---
+        video.onended = function() {
+            closeSecretVideo(); // Ferme l'overlay automatiquement
+        };
+    }
+};
+
+window.closeSecretVideo = function() {
+    const overlay = document.getElementById('video-egg-overlay');
+    const video = document.getElementById('egg-video-player');
+    
+    if (overlay && video) {
+        overlay.style.display = 'none';
+        video.pause();
+        video.currentTime = 0; // Remet à zéro pour la prochaine fois
+        document.body.style.overflow = 'auto';
+    }
+};
